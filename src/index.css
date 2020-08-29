@@ -5,7 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #494255;
+  background: #5A56AB;
+}
+
+body .main-page {
+  background: url('images/hero.png') no-repeat;
+  background-size: cover;
+  background-position: 200px;
+  background-attachment: fixed;
 }
 
 code {
