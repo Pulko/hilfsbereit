@@ -2,87 +2,110 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { makeStyles, Link, Grid, Button } from '@material-ui/core';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-import BottomBar from 'components/BottomBar';
-import InfoBlocks from 'components/InfoBlocks';
+import { makeStyles, Theme, Button, Link } from '@material-ui/core';
 
-const useStyles = makeStyles({
-  infoBlock: {
-    marginTop: '100px',
+import classnames from 'helpers/classnames';
+
+import theme from 'theme/theme';
+import NavigationBar from 'components/AppBar/NavigationBar';
+
+
+const useStyles = makeStyles((theme: Theme) => ({
+  contrastTextColor: {
+    color: theme.palette.primary.contrastText,
   },
-  container: {
-    padding: '100px 0',
+  boldText: {
+    fontWeight: 700,
   },
-  title: {
-    fontWeight: 600,
-    color: '#FFFFFF',
+  thinText: {
+    fontWeight: 300,
+  },
+  limitedWidth: {
+    maxWidth: '70%',
+  },
+  primaryBackground: {
+    background: theme.palette.action.active,
+  },
+  contrastText: {
+    color: theme.palette.primary.contrastText,
+  },
+  secondaryTextColor: {
+    color: theme.palette.text.secondary,
+  },
+
+  primaryButton: {
+    marginTop: '30px',
+    '&:hover': {
+      background: theme.palette.action.active,
+    },
+  },
+  secondaryCta: {
+    padding: '300px 0 100px 0',
+    textAlign: 'center',
   },
   subtitle: {
-    fontWeight: 500,
-    color: '#FFFFFF',
-  },
-  link: {
-    color: '#FFFFFF',
-    borderBottom: '1px solid #FFFFFF',
-  },
-  paper: {
-    background: '#413B4D',
-    padding: '20px',
-  },
-  cta: {
     marginTop: '50px',
   },
-  button: {
-    color: '#FFFFFF',
-    background: '#887d9e'
+  content: {
+    paddingTop: '20%',
   },
-});
+  link: {
+    borderBottom: `3px solid ${theme.palette.primary.main}`,
+    '&:hover': {
+      textDecoration: 'none',
+      borderBottom: `10px solid ${theme.palette.primary.main}`,
+      transition: 'all .3s',
+    },
+  },
+}))
 
 const MainPage: React.FC = () => {
-  const classes = useStyles()
+  const classes = useStyles(theme)
 
   return (
-    <Container className={classes.container}>
-      <Typography variant="h1" className={classes.title}>
-        {'Welcome to Hilfsbereit'}
-      </Typography>
+    <div className={classnames(['main-page'])}>
+      <NavigationBar />
+      <Container className={classes.content}>
+        <Typography
+          variant="h1"
+          className={classnames([classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
+        >
+          {'Find a specialist that fits your needs'}
+        </Typography>
 
-      <Typography variant="h4" className={classes.subtitle}>
-        {'The place when you can find a person to help'}
-      </Typography>
+        <Typography
+          variant="subtitle1"
+          className={classnames([classes.subtitle, classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
+        >
+          {'Start looking for the best service in Hamburg.'}
+          <br />
+          {'Just enter the activity you need.'}
+        </Typography>
 
-      <InfoBlocks />
+        <Button
+          className={classnames([classes.primaryBackground, classes.primaryButton])}
+        >
+          <>
+            <Typography className={classnames([classes.contrastText, classes.boldText])}>
+              {'get strarted'}
+            </Typography>
+            <ArrowForwardIcon className={classnames([classes.contrastText, classes.boldText])} />
+          </>
+        </Button>
 
-      <Grid container justify="center" className={classes.cta} spacing={3}>
-        <Grid item>
-          <Button className={classes.button}>
-            You are specialist
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button className={classes.button}>
-            You need a hand
-          </Button>
-        </Grid>
-      </Grid>
-      
-      <BottomBar
-        tools={
-          <Typography className={classes.subtitle}>
-            {'Created by '}
-            <Link
-              href="https://github.com/pulko"
-              target="-blank"
-              className={classes.link}
-            >
-              {'Pulko'}
-            </Link>
+        <div className={classnames([classes.secondaryCta])}>
+          <Typography variant="body1" className={classes.secondaryTextColor}>
+            {'I want to'}
           </Typography>
-        }
-      />
 
-    </Container>
+          <Link className={classes.link} href="/">
+            {'sign up as a specialist'.toUpperCase()}
+          </Link>
+        </div>
+      </Container>
+    </div>
   );
 }
 
