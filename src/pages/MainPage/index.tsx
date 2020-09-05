@@ -59,7 +59,7 @@ const MainPage: React.FC = () => {
   const classes = useStyles(theme)
 
   return (
-    <div className={classnames(['main-page'])}>
+    <>
       <Container className={classes.content}>
         <Typography
           variant="h1"
@@ -88,7 +88,7 @@ const MainPage: React.FC = () => {
           </Button>
 
       </Container>
-    </div>
+    </>
   );
 }
 
