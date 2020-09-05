@@ -5,11 +5,12 @@ import Container from '@material-ui/core/Container';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import { makeStyles, Theme, Button } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
 
 import classnames from 'helpers/classnames';
 
 import theme from 'theme/theme';
+import NavigationBar from 'components/AppBar/NavigationBar';
+
 
 const useStyles = makeStyles((theme: Theme) => ({
   contrastTextColor: {
@@ -39,9 +40,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       background: theme.palette.action.active,
     },
   },
-  link: {
-    display: 'flex',
-  },
   secondaryCta: {
     padding: '300px 0 100px 0',
     textAlign: 'center',
@@ -53,43 +51,33 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: '300px',
     paddingBottom: '100px',
   },
+  link: {
+    borderBottom: `3px solid ${theme.palette.primary.main}`,
+    '&:hover': {
+      textDecoration: 'none',
+      borderBottom: `10px solid ${theme.palette.primary.main}`,
+      transition: 'all .3s',
+    },
+  },
 }))
 
-const MainPage: React.FC = () => {
+const CreateList: React.FC = () => {
   const classes = useStyles(theme)
 
   return (
     <div className={classnames(['main-page'])}>
+      <NavigationBar />
       <Container className={classes.content}>
         <Typography
           variant="h1"
           className={classnames([classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
         >
-          {'Plan and share'}
+          {'ZZZZZZUUUUP!'}
         </Typography>
-
-        <Typography
-          variant="subtitle1"
-          className={classnames([classes.subtitle, classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
-        >
-          {'Create your planning lists.'}
-          <br />
-          {'Share your goals with your friends.'}
-        </Typography>
-
-          <Button className={classnames([classes.primaryBackground, classes.primaryButton])}>
-            <Link href="/create" className={classes.link}>
-              <Typography className={classnames([classes.contrastText, classes.boldText])}>
-                {'get strarted'}
-              </Typography>
-
-              <ArrowForwardIcon className={classnames([classes.contrastText, classes.boldText])} />
-            </Link>
-          </Button>
-
+        
       </Container>
     </div>
   );
 }
 
-export default MainPage;
+export default CreateList;

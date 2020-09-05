@@ -8,13 +8,6 @@ body {
   background: #5A56AB;
 }
 
-body .main-page {
-  background: url('images/hero.png') no-repeat;
-  background-size: cover;
-  background-position: 200px;
-  background-attachment: fixed;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

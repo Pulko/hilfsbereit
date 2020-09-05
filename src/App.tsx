@@ -1,17 +1,19 @@
 import React from 'react';
-
 import { ThemeProvider } from '@material-ui/core';
 
-import MainPage from 'pages/MainPage';
+import Routes from 'Router'
+import NavigationBar from 'components/AppBar/NavigationBar';
+
 
 import theme from 'theme/theme';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <MainPage />
+      <NavigationBar />
+      <Routes />
     </ThemeProvider>
   );
 }
 
-export default App;
+export default App

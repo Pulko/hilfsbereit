@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const NavigationBar: React.FC = (props) => {
+const NavigationBar: React.FC = () => {
   const classes = useStyles(theme)
 
   return (
