@@ -77,14 +77,14 @@ const MainPage: React.FC = () => {
           {'Share your goals with your friends.'}
         </Typography>
 
-          <Button className={classnames([classes.primaryBackground, classes.primaryButton])}>
-            <Link href="/list" className={classes.link}>
+          <Button className={classnames([classes.primaryBackground, classes.primaryButton])} href="/list">
+            {/* <Link  className={classes.link}> */}
               <Typography className={classnames([classes.contrastText, classes.boldText])}>
                 {'get strarted'}
               </Typography>
 
               <ArrowForwardIcon className={classnames([classes.contrastText, classes.boldText])} />
-            </Link>
+            {/* </Link> */}
           </Button>
 
       </Container>

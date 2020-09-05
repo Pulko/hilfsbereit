@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme, AppBar, Container } from '@material-ui/core';
+import { makeStyles, Theme, AppBar, Container, Link } from '@material-ui/core';
 
 import theme from 'theme/theme';
 
@@ -34,13 +34,15 @@ const NavigationBar: React.FC = () => {
   return (
     <AppBar className={classes.bar}>
       <Container className={classes.header}>
-        <Typography variant="subtitle1" className={classes.primaryHeader}>
-          {'Hilfsbereit'}
-        </Typography>
+        <Link href="/">
+          <Typography variant="subtitle1" className={classes.primaryHeader}>
+            {'Hilfsbereit'}
+          </Typography>
 
-        <Typography variant="subtitle1" className={classes.secondaryHeader}>
-          {'If you need a hand'}
-        </Typography>
+          <Typography variant="subtitle1" className={classes.secondaryHeader}>
+            {'If you need a hand'}
+          </Typography>
+        </Link>
       </Container>
     </AppBar>
   );
