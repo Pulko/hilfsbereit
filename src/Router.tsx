@@ -7,7 +7,7 @@ import CreateList from 'pages/CreateList';
 const Routes = () => (
   <Router>
     <Route path="/" exact component={MainPage} />
-    <Route path="/create" exact component={CreateList} />
+    <Route path="/list" exact component={CreateList} />
   </Router>
 )
 

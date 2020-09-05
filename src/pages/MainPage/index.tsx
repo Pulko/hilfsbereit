@@ -78,7 +78,7 @@ const MainPage: React.FC = () => {
         </Typography>
 
           <Button className={classnames([classes.primaryBackground, classes.primaryButton])}>
-            <Link href="/create" className={classes.link}>
+            <Link href="/list" className={classes.link}>
               <Typography className={classnames([classes.contrastText, classes.boldText])}>
                 {'get strarted'}
               </Typography>
