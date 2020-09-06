@@ -25,18 +25,16 @@ const Options: React.FC = () => {
   const classes = useStyles(theme)
 
   return (
-    <>
-      <Container className={classes.content}>
-        <Typography variant="h2">
-          {'Start new list or get an access'}
-        </Typography>
+    <Container className={classes.content}>
+      <Typography variant="h2">
+        {'Start new list or get an access'}
+      </Typography>
 
-        <div className={classes.buttons}>
-          <Button href="list/create">Create</Button>
-          <Button>Use Existing</Button>
-        </div>
-      </Container>
-    </>
+      <div className={classes.buttons}>
+        <Button href="list/create">Create</Button>
+        <Button>Use Existing</Button>
+      </div>
+    </Container>
   );
 }
 

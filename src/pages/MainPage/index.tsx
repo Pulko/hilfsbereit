@@ -59,36 +59,32 @@ const MainPage: React.FC = () => {
   const classes = useStyles(theme)
 
   return (
-    <>
-      <Container className={classes.content}>
-        <Typography
-          variant="h1"
-          className={classnames([classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
-        >
-          {'Plan and share'}
+    <Container className={classes.content}>
+      <Typography
+        variant="h1"
+        className={classnames([classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
+      >
+        {'Plan and share'}
+      </Typography>
+
+      <Typography
+        variant="subtitle1"
+        className={classnames([classes.subtitle, classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
+      >
+        {'Create your planning lists.'}
+        <br />
+        {'Share your goals with your friends.'}
+      </Typography>
+
+      <Button className={classnames([classes.primaryBackground, classes.primaryButton])} href="/list">
+        <Typography className={classnames([classes.contrastText, classes.boldText])}>
+          {'get strarted'}
         </Typography>
 
-        <Typography
-          variant="subtitle1"
-          className={classnames([classes.subtitle, classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
-        >
-          {'Create your planning lists.'}
-          <br />
-          {'Share your goals with your friends.'}
-        </Typography>
+        <ArrowForwardIcon className={classnames([classes.contrastText, classes.boldText])} />
+      </Button>
 
-          <Button className={classnames([classes.primaryBackground, classes.primaryButton])} href="/list">
-            {/* <Link  className={classes.link}> */}
-              <Typography className={classnames([classes.contrastText, classes.boldText])}>
-                {'get strarted'}
-              </Typography>
-
-              <ArrowForwardIcon className={classnames([classes.contrastText, classes.boldText])} />
-            {/* </Link> */}
-          </Button>
-
-      </Container>
-    </>
+    </Container>
   );
 }
 
