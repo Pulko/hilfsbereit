@@ -22,7 +22,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      
+    },
+    item: {
+      margin: '5px 0',
+      padding: '20px 40px',
       backgroundColor: theme.palette.background.paper,
+      borderRadius: '4px',
     },
   }),
 );
@@ -37,9 +43,8 @@ const Tasks: React.FC<TasksProps> = (props) => {
 
   return (
     <List className={classes.root}>
-      {tasks.map((task, index) => {
-        return (
-          <ListItem key={index}>
+      {tasks.map((task, index) => (
+        <ListItem key={index} className={classes.item}>
             <ListItemIcon>
               <Checkbox
                 edge="start"
@@ -54,13 +59,13 @@ const Tasks: React.FC<TasksProps> = (props) => {
             <ListItemText id={index.toString()} primary={task.text} />
 
             <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="comments">
+              <IconButton aria-label="comments">
                 <CommentIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
-        );
-      })}
+        )
+      )}
     </List>
   )
 }

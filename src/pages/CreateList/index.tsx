@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       background: theme.palette.background.paper,
       fontSize: '20px',
-      marginTop: '20px',
       '&:hover': {
         background: theme.palette.background.paper,
       },
