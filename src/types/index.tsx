@@ -3,4 +3,4 @@ export interface Task {
   checked: boolean,
 }
 
-export const DEFAULT_TASK: Task = { text: '', checked: false }
+export const DEFAULT_TASK: Task = { text: 'TODO: nothing yet...', checked: false }

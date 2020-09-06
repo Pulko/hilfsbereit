@@ -13,7 +13,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 
-
 interface TasksProps {
   completeTask: (event: any) => any,
   tasks: Array<Task>,
@@ -34,20 +33,11 @@ const Tasks: React.FC<TasksProps> = (props) => {
     tasks,
   } = props
 
-  const handleClick = (event: any, index: number) => {
-    event.preventDefault()
-    event.stopPropagation()
-
-    completeTask(index)
-  }
-
   const classes = useStyles()
 
   return (
     <List className={classes.root}>
       {tasks.map((task, index) => {
-        const labelId = `task-item-${index}`;
-
         return (
           <ListItem key={index}>
             <ListItemIcon>
@@ -56,11 +46,13 @@ const Tasks: React.FC<TasksProps> = (props) => {
                 checked={task.checked}
                 tabIndex={-1}
                 disableRipple
-                onClick={(event) => handleClick(event, index)}
-                inputProps={{ 'aria-labelledby': labelId }}
+                onClick={() => completeTask(index)}
+                inputProps={{ 'aria-labelledby': `task-item-${index}` }}
               />
             </ListItemIcon>
-            <ListItemText id={labelId} primary={task.text} />
+
+            <ListItemText id={index.toString()} primary={task.text} />
+
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="comments">
                 <CommentIcon />
