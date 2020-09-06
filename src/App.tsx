@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
 
-import Routes from 'Routes'
+import Routes from 'routes'
 import NavigationBar from 'components/AppBar/NavigationBar';
 
 
