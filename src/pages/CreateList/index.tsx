@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const CreateList = () => {
+const CreateList: React.FC = () => {
   
 
   return (
