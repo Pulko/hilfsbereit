@@ -34,7 +34,7 @@ const CreateList: React.FC = () => {
 
     currentTasks.splice(index, 1, selectedTask)
 
-    setTasks(currentTasks)
+    setTasks(currentTasks)// make it work
   };
 
   const addTask = () => setTasks(tasks.concat(DEFAULT_TASK))
