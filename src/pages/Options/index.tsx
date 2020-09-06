@@ -5,8 +5,6 @@ import Container from '@material-ui/core/Container';
 
 import { makeStyles, Theme, Button } from '@material-ui/core';
 
-import classnames from 'helpers/classnames';
-
 import theme from 'theme/theme';
 
 
