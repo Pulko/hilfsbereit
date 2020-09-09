@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import { Typography, Button } from '@material-ui/core';
 import Tasks from 'components/Tasks';
 
+const MAXIMUM_TASKS = 8
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
   }),
-);
+)
 
 const CreateList: React.FC = () => {
   const classes = useStyles()
@@ -47,7 +48,7 @@ const CreateList: React.FC = () => {
     setTasks(currentTasks)
   } 
 
-  const addTask = () => setTasks(tasks.concat(DEFAULT_TASK))
+  const addTask = () => tasks.length < MAXIMUM_TASKS && setTasks(tasks.concat(DEFAULT_TASK))
 
   return (
     <Container className={classes.content}>
@@ -57,9 +58,11 @@ const CreateList: React.FC = () => {
 
       <Tasks tasks={tasks} completeTask={changeTask} saveText={changeTask} />
       
-      <Button onClick={addTask} className={classes.button}>
-        {'+'}
-      </Button>
+      {tasks.length < MAXIMUM_TASKS && (
+        <Button onClick={addTask} className={classes.button}>
+          {'+'}
+        </Button>
+      )}
     </Container>
   )
 }

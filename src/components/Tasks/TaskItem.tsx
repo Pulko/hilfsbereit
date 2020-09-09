@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
-import { TextField } from '@material-ui/core';
+import { TextField, Theme, createStyles, makeStyles } from '@material-ui/core';
 
 interface TaskItemProps {
   completeTask: (event: any) => any,
@@ -16,6 +16,14 @@ interface TaskItemProps {
   task: Task,
   index: number,
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    input: {
+      width: '60%',
+    },
+  }),
+)
 
 const TaskItem = (props: TaskItemProps) => {
   const {
@@ -30,6 +38,7 @@ const TaskItem = (props: TaskItemProps) => {
 
   const [selected, setSelected] = React.useState(false)
   const [input, setInput] = React.useState(text)
+  const classes = useStyles()
 
   const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value)
@@ -54,7 +63,14 @@ const TaskItem = (props: TaskItemProps) => {
       </ListItemIcon>
 
       {selected
-        ? <TextField onBlur={() => onBlur(index, input)} onChange={onTextChange} value={input} />
+        ? (
+          <TextField
+            onBlur={() => onBlur(index, input)}
+            onChange={onTextChange}
+            value={input}
+            className={classes.input}
+          />
+        )
         : <ListItemText id={index.toString()} primary={text} />
       }
 
