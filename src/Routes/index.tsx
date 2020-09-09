@@ -7,8 +7,8 @@ import MainPage from 'pages/MainPage';
 const Routes: React.FC = () => (
   <Router>
     <Switch>
-      {routes.map(route => <Route exact {...route} />)}
-      <Route component={MainPage} />
+      {routes.map((route, index) => <Route key={index} exact {...route} />)}
+      <Route key={'default'} component={MainPage} />
     </Switch>
   </Router>
 )

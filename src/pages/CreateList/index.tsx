@@ -5,8 +5,11 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { DEFAULT_TASK } from 'types';
 
 import Container from '@material-ui/core/Container';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, CircularProgress } from '@material-ui/core';
+
 import Tasks from 'components/Tasks';
+
+import database from 'firebaseConfig';
 
 const MAXIMUM_TASKS = 8
 
@@ -21,11 +24,26 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'right',
       marginBottom: '50px',
     },
-    button: {
+    buttonWrapper: {
+      textAlign: 'right',
+      height: '122px',
+    },
+    saveButton: {
       background: theme.palette.background.paper,
       fontSize: '20px',
+      height: '47px',
+      width: '100px',
+      marginTop: '20px',
       '&:hover': {
         background: theme.palette.background.paper,
+      },
+    },
+    button: {
+      fontSize: '30px',
+      fontWeight: 700,
+      borderRadius: '100%',
+      '&:hover': {
+        background: 'transparent',
       },
     },
   }),
@@ -34,8 +52,11 @@ const useStyles = makeStyles((theme: Theme) =>
 const CreateList: React.FC = () => {
   const classes = useStyles()
   const [tasks, setTasks] = React.useState([DEFAULT_TASK])
+  const [loading, setLoading] = React.useState(false)
+  const [changed, setChanged] = React.useState(false)
 
   const changeTask = (index: number, text?: string) => {
+    setLoading(false)
     const currentTasks = [...tasks]
     const currentTask = currentTasks[index]
 
@@ -46,15 +67,45 @@ const CreateList: React.FC = () => {
     currentTasks.splice(index, 1, selectedTask)
 
     setTasks(currentTasks)
-  } 
+    setChanged(true)
+  }
 
-  const addTask = () => tasks.length < MAXIMUM_TASKS && setTasks(tasks.concat(DEFAULT_TASK))
+  const saveList = () => {
+    setLoading(true);
+
+    (database as any).collection('lists').doc('new').set({
+      password: 'asd',
+      tasks,
+    })
+      .then(() => {
+        setLoading(false)
+      })
+      .catch((error: any) => {
+        setLoading(false)
+        console.log('Error catched!', error)
+      });
+  }
+
+  const addTask = () => {
+    setChanged(true)
+    tasks.length < MAXIMUM_TASKS && setTasks(tasks.concat(DEFAULT_TASK))
+  }
 
   return (
     <Container className={classes.content}>
-      <Typography variant="h2" className={classes.heading}>
-        {'Create your list'}
-      </Typography>
+      {changed
+        ? (
+          <div className={classes.buttonWrapper}>
+            <Button onClick={saveList} className={classes.saveButton}>
+              {loading ? <CircularProgress size={30} /> : 'Save'}
+            </Button>
+          </div>
+        ) : (
+          <Typography variant="h2" className={classes.heading}>
+            {'New List'}
+          </Typography>
+        )
+      }
 
       <Tasks tasks={tasks} completeTask={changeTask} saveText={changeTask} />
       
