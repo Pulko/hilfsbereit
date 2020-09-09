@@ -49,7 +49,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-const CreateList: React.FC = () => {
+interface PageProps {
+  history: {
+    push: (newPath: string) => void,
+  },
+}
+
+const CreateList: React.FC<PageProps> = (props) => {
+  debugger
   const classes = useStyles()
   const [tasks, setTasks] = React.useState([DEFAULT_TASK])
   const [loading, setLoading] = React.useState(false)
@@ -73,11 +80,12 @@ const CreateList: React.FC = () => {
   const saveList = () => {
     setLoading(true);
 
-    (database as any).collection('lists').doc('new').set({
+    (database as any).collection('lists').add({
       password: 'asd',
       tasks,
     })
-      .then(() => {
+      .then((result: any) => {
+        props.history.push(`/list/create/${result.id}`)
         setLoading(false)
       })
       .catch((error: any) => {
