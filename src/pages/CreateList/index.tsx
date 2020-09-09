@@ -34,15 +34,18 @@ const CreateList: React.FC = () => {
   const classes = useStyles()
   const [tasks, setTasks] = React.useState([DEFAULT_TASK])
 
-  const completeTask = (index: number) => {
+  const changeTask = (index: number, text?: string) => {
     const currentTasks = [...tasks]
+    const currentTask = currentTasks[index]
 
-    const selectedTask = { text: currentTasks[index].text, checked: !currentTasks[index].checked }
-
+    const selectedTask = text
+      ? { text, checked: currentTask.checked }
+      : { text: currentTask.text, checked: !currentTask.checked }
+    
     currentTasks.splice(index, 1, selectedTask)
 
     setTasks(currentTasks)
-  };
+  } 
 
   const addTask = () => setTasks(tasks.concat(DEFAULT_TASK))
 
@@ -52,7 +55,7 @@ const CreateList: React.FC = () => {
         {'Create your list'}
       </Typography>
 
-      <Tasks tasks={tasks} completeTask={completeTask} />
+      <Tasks tasks={tasks} completeTask={changeTask} saveText={changeTask} />
       
       <Button onClick={addTask} className={classes.button}>
         {'+'}

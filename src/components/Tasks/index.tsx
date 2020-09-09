@@ -6,15 +6,12 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
+
+import TaskItem from './TaskItem';
 
 interface TasksProps {
   completeTask: (event: any) => any,
+  saveText: (index: number, text: string) => void,
   tasks: Array<Task>,
 }
 
@@ -36,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Tasks: React.FC<TasksProps> = (props) => {
   const {
     completeTask,
+    saveText,
     tasks,
   } = props
 
@@ -45,25 +43,13 @@ const Tasks: React.FC<TasksProps> = (props) => {
     <List className={classes.root}>
       {tasks.map((task, index) => (
         <ListItem key={index} className={classes.item}>
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={task.checked}
-                tabIndex={-1}
-                disableRipple
-                onClick={() => completeTask(index)}
-                inputProps={{ 'aria-labelledby': `task-item-${index}` }}
-              />
-            </ListItemIcon>
-
-            <ListItemText id={index.toString()} primary={task.text} />
-
-            <ListItemSecondaryAction>
-              <IconButton aria-label="comments">
-                <CommentIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          <TaskItem
+            index={index}
+            completeTask={completeTask}
+            task={task}
+            saveText={saveText}
+          />
+        </ListItem>
         )
       )}
     </List>
