@@ -5,7 +5,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { DEFAULT_TASK } from 'types';
 
 import Container from '@material-ui/core/Container';
-import { Typography, Button, CircularProgress } from '@material-ui/core';
+import { Typography, Button, CircularProgress, Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add'
 
 import Tasks from 'components/Tasks';
 
@@ -16,34 +17,37 @@ const MAXIMUM_TASKS = 8
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
-      marginTop: '100px',
       color: theme.palette.text.secondary,
       textAlign: 'center',
+      position: 'relative',
+      margin: '100px auto',
     },
     heading: {
       textAlign: 'right',
       marginBottom: '50px',
     },
     buttonWrapper: {
-      textAlign: 'right',
-      height: '122px',
+      textAlign: 'left',
+      position: 'relative',
     },
     saveButton: {
       background: theme.palette.background.paper,
       fontSize: '20px',
       height: '47px',
       width: '100px',
-      marginTop: '20px',
+      position: 'absolute',
+      right: 0,
       '&:hover': {
         background: theme.palette.background.paper,
       },
     },
-    button: {
+    addButton: {
       fontSize: '30px',
       fontWeight: 700,
       borderRadius: '100%',
       '&:hover': {
-        background: 'transparent',
+        background: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
       },
     },
   }),
@@ -56,7 +60,6 @@ interface PageProps {
 }
 
 const CreateList: React.FC<PageProps> = (props) => {
-  debugger
   const classes = useStyles()
   const [tasks, setTasks] = React.useState([DEFAULT_TASK])
   const [loading, setLoading] = React.useState(false)
@@ -70,7 +73,7 @@ const CreateList: React.FC<PageProps> = (props) => {
     const selectedTask = text
       ? { text, checked: currentTask.checked }
       : { text: currentTask.text, checked: !currentTask.checked }
-    
+
     currentTasks.splice(index, 1, selectedTask)
 
     setTasks(currentTasks)
@@ -101,27 +104,26 @@ const CreateList: React.FC<PageProps> = (props) => {
 
   return (
     <Container className={classes.content}>
-      {changed
-        ? (
-          <div className={classes.buttonWrapper}>
-            <Button onClick={saveList} className={classes.saveButton}>
-              {loading ? <CircularProgress size={30} /> : 'Save'}
-            </Button>
-          </div>
-        ) : (
-          <Typography variant="h2" className={classes.heading}>
-            {'New List'}
-          </Typography>
-        )
-      }
+
+      <Typography variant="h2" className={classes.heading}>
+        {changed ? 'Save list' : 'New list'}
+      </Typography>
 
       <Tasks tasks={tasks} completeTask={changeTask} saveText={changeTask} />
-      
-      {tasks.length < MAXIMUM_TASKS && (
-        <Button onClick={addTask} className={classes.button}>
-          {'+'}
-        </Button>
-      )}
+
+      <Container className={classes.buttonWrapper}>
+        {tasks.length < MAXIMUM_TASKS && !loading && (
+          <Fab color="primary" aria-label="add" className={classes.addButton} onClick={addTask}>
+            <AddIcon />
+          </Fab>
+        )}
+
+        {changed && (
+          <Button onClick={saveList} className={classes.saveButton}>
+            {loading ? <CircularProgress size={30} /> : 'Save'}
+          </Button>
+        )}
+      </Container>
     </Container>
   )
 }

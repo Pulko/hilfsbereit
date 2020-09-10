@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   contrastTextColor: {
     color: theme.palette.primary.contrastText,
   },
+  title: {
+    fontSize: '500%',
+    lineHeight: 1,
+  },
   boldText: {
     fontWeight: 700,
   },
@@ -62,7 +66,7 @@ const MainPage: React.FC = () => {
     <Container className={classes.content}>
       <Typography
         variant="h1"
-        className={classnames([classes.secondaryTextColor, classes.limitedWidth, classes.thinText])}
+        className={classnames([classes.secondaryTextColor, classes.limitedWidth, classes.thinText, classes.title])}
       >
         {'Plan and share'}
       </Typography>

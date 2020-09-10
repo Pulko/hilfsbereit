@@ -10,9 +10,9 @@ import theme from 'theme/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
-    marginTop: '200px',
     color: theme.palette.text.secondary,
     textAlign: 'center',
+    margin: '200px auto 100px auto',
   },
   buttons: {
     marginTop: '100px',
