@@ -68,6 +68,7 @@ const TaskItem = (props: TaskItemProps) => {
             onBlur={() => onBlur(index, input)}
             onChange={onTextChange}
             value={input || text}
+            autoFocus
             className={classes.input}
           />
         )
