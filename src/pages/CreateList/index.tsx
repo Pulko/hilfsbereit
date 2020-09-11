@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -10,7 +10,8 @@ import AddIcon from '@material-ui/icons/Add'
 
 import Tasks from 'components/Tasks';
 
-import database from 'firebaseConfig';
+import { database, databaseDoc } from 'firebaseConfig';
+import createTypography from '@material-ui/core/styles/createTypography';
 
 const MAXIMUM_TASKS = 8
 
@@ -57,6 +58,9 @@ interface PageProps {
   history: {
     push: (newPath: string) => void,
   },
+  location: {
+    hash: string,
+  }
 }
 
 const CreateList: React.FC<PageProps> = (props) => {
@@ -64,6 +68,7 @@ const CreateList: React.FC<PageProps> = (props) => {
   const [tasks, setTasks] = React.useState([DEFAULT_TASK])
   const [loading, setLoading] = React.useState(false)
   const [changed, setChanged] = React.useState(false)
+  const [listId] = React.useState(props.location?.hash?.slice(1))
 
   const changeTask = (index: number, text?: string) => {
     setLoading(false)
@@ -80,15 +85,32 @@ const CreateList: React.FC<PageProps> = (props) => {
     setChanged(true)
   }
 
+  useEffect(() => {
+    if (listId) {
+      setChanged(true);
+
+      databaseDoc(listId).get()
+        .then((doc: any) => {
+          const data = doc.data()
+          setTasks(data.tasks)
+        })
+    }
+  }, [props.history, listId, setTasks])
+
   const saveList = () => {
     setLoading(true);
 
-    (database as any).collection('lists').add({
-      password: 'asd',
-      tasks,
-    })
+    (!listId.length
+      ? (database as any).add({
+        password: 'asd',
+        tasks,
+      })
+      : databaseDoc(listId).set({
+        password: 'asd',
+        tasks,
+      }))
       .then((result: any) => {
-        props.history.push(`/list/create/${result.id}`)
+        props.history.push(`/list/create#${result.id}`)
         setLoading(false)
       })
       .catch((error: any) => {
@@ -106,8 +128,15 @@ const CreateList: React.FC<PageProps> = (props) => {
     <Container className={classes.content}>
 
       <Typography variant="h2" className={classes.heading}>
-        {changed ? 'Save list' : 'New list'}
+        {changed ? 'List' : 'New list'}
       </Typography>
+
+      {listId && (
+        <Typography variant="subtitle1">
+          <b>{'id: '}</b>
+          {listId}
+        </Typography>
+      )}
 
       <Tasks tasks={tasks} completeTask={changeTask} saveText={changeTask} />
 
