@@ -12,6 +12,6 @@ const firebaseConfig: object = {
     measurementId: "G-LH28QKZ89E"
 };
 
+export const database = firebase.initializeApp(firebaseConfig).firestore().collection('lists')
 
-
-export default firebase.initializeApp(firebaseConfig).firestore()
+export const databaseDoc = (id: string) => database.doc(id)
