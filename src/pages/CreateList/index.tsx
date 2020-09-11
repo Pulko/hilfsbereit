@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-import { DEFAULT_TASK } from 'types';
+import { DEFAULT_TASK, PageProps } from 'types';
 
 import Container from '@material-ui/core/Container';
 import { Typography, Button, CircularProgress, Fab } from '@material-ui/core';
@@ -11,7 +11,6 @@ import AddIcon from '@material-ui/icons/Add'
 import Tasks from 'components/Tasks';
 
 import { database, databaseDoc } from 'firebaseConfig';
-import createTypography from '@material-ui/core/styles/createTypography';
 
 const MAXIMUM_TASKS = 8
 
@@ -53,15 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 )
-
-interface PageProps {
-  history: {
-    push: (newPath: string) => void,
-  },
-  location: {
-    hash: string,
-  }
-}
 
 const CreateList: React.FC<PageProps> = (props) => {
   const classes = useStyles()
