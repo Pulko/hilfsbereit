@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Task } from 'types';
+import { Task, DEFAULT_TASK_TEXT } from 'types';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -71,7 +71,7 @@ const TaskItem = (props: TaskItemProps) => {
             className={classes.input}
           />
         )
-        : <ListItemText id={index.toString()} primary={text} />
+        : <ListItemText id={index.toString()} primary={text || DEFAULT_TASK_TEXT} />
       }
 
       <ListItemSecondaryAction>
