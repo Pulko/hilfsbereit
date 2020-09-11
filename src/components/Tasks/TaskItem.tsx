@@ -46,7 +46,7 @@ const TaskItem = (props: TaskItemProps) => {
 
   const onBlur = (index: number, text: string) => {
     setSelected(false)
-    saveText(index, input)
+    saveText(index, text)
   }
 
   return (
@@ -67,7 +67,7 @@ const TaskItem = (props: TaskItemProps) => {
           <TextField
             onBlur={() => onBlur(index, input)}
             onChange={onTextChange}
-            value={input}
+            value={input || text}
             className={classes.input}
           />
         )
